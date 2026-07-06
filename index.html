@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ouirise Initiative — Launch and Scale Your Business</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f0;
+            --card: #ffffff;
+            --text: #1a1a2e;
+            --muted: #6b7280;
+            --accent: #006bb6;
+            --accent2: #f58426;
+            --accent3: #1d428a;
+            --border: #e5e7eb;
+            --shadow: rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 2rem;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent3);
+            letter-spacing: -0.02em;
+        }
+        .logo span { color: var(--accent2); }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .nav-links a {
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 2rem 100px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.03em;
+        }
+        .hero h1 .blue { color: var(--accent); }
+        .hero h1 .orange { color: var(--accent2); }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            max-width: 640px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+        .hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .btn {
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 14px rgba(0,107,182,0.3);
+        }
+        .btn-primary:hover {
+            background: var(--accent3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,107,182,0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .section-sub {
+            text-align: center;
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+        }
+
+        /* ENGINEERS */
+        .engineers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+        .eng-card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid var(--border);
+            transition: all 0.25s;
+        }
+        .eng-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px var(--shadow);
+            border-color: var(--accent2);
+        }
+        .eng-card .icon {
+            width: 48px; height: 48px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent3));
+            color: white;
+        }
+        .eng-card:nth-child(2) .icon { background: linear-gradient(135deg, var(--accent2), #d97706); }
+        .eng-card:nth-child(3) .icon { background: linear-gradient(135deg, var(--accent3), var(--accent)); }
+        .eng-card:nth-child(4) .icon { background: linear-gradient(135deg, #d97706, var(--accent2)); }
+        .eng-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .eng-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* DEPLOYMENTS — 2 rows x 4 cols */
+        .deploy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 1rem;
+        }
+        .deploy-card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .deploy-card:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            transform: scale(1.03);
+        }
+        .deploy-card:nth-child(2):hover { background: var(--accent2); border-color: var(--accent2); }
+        .deploy-card:nth-child(3):hover { background: var(--accent3); border-color: var(--accent3); }
+        .deploy-card:nth-child(4):hover { background: var(--accent); border-color: var(--accent); }
+        .deploy-card:nth-child(5):hover { background: var(--accent2); border-color: var(--accent2); }
+        .deploy-card:nth-child(6):hover { background: var(--accent3); border-color: var(--accent3); }
+        .deploy-card:nth-child(7):hover { background: var(--accent); border-color: var(--accent); }
+        .deploy-card:nth-child(8):hover { background: var(--accent2); border-color: var(--accent2); }
+
+        /* PLANS */
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .plan-card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 2rem 1.8rem;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.25s;
+        }
+        .plan-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px var(--shadow);
+        }
+        .plan-card.popular {
+            border: 2px solid var(--accent2);
+            box-shadow: 0 8px 30px rgba(245,132,38,0.15);
+        }
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent2);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .plan-tier {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+        .plan-card:nth-child(2) .plan-tier { color: var(--accent2); }
+        .plan-card:nth-child(3) .plan-tier { color: var(--accent3); }
+        .plan-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.02em;
+        }
+        .plan-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .plan-features {
+            list-style: none;
+        }
+        .plan-features li {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .plan-features li:last-child { border-bottom: none; }
+        .plan-features li::before {
+            content: "✓";
+            color: var(--accent2);
+            font-weight: 700;
+        }
+        .plan-card:nth-child(3) .plan-features li::before { color: var(--accent); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        footer a:hover { color: var(--accent2); }
+
+        @media (max-width: 900px) {
+            .plans-grid { grid-template-columns: 1fr; }
+            .deploy-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+        @media (max-width: 500px) {
+            .deploy-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">Ouirise<span>.</span></div>
+            <div class="nav-links">
+                <a href="#engineers">Engineers</a>
+                <a href="#deployments">Deployments</a>
+                <a href="#plans">Plans</a>
+                <a href="https://ouirise.github.io" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1><span class="blue">Launch</span> and <span class="orange">Scale</span> Your Business</h1>
+        <p>We bridge the gap between startup vision and enterprise-grade reality. Using agentic workflows and modern cloud architecture, we develop the tools innovators need to lead.</p>
+        <div class="hero-cta">
+            <a href="#plans" class="btn btn-primary">View Plans</a>
+            <a href="https://ouirise.github.io" target="_blank" class="btn btn-secondary">ouirise.github.io</a>
+        </div>
+    </section>
+
+    <section class="section" id="engineers">
+        <div class="section-title">Our Software Engineers</div>
+        <div class="section-sub">Over 8 Years of Developing Custom Solutions</div>
+        <div class="engineers-grid">
+            <div class="eng-card">
+                <div class="icon">⚡</div>
+                <h3>Frontend Excellence</h3>
+                <p>Developed React, Angular, HTML, CSS, and WordPress applications for industry innovators in FinTech, Entrepreneurship, and Startups.</p>
+            </div>
+            <div class="eng-card">
+                <div class="icon">☁️</div>
+                <h3>Cloud Architecture</h3>
+                <p>Incorporate modern cloud practices for data security and analytics. Use agentic workflows for smooth deployment timelines.</p>
+            </div>
+            <div class="eng-card">
+                <div class="icon">🎨</div>
+                <h3>Custom Interfaces</h3>
+                <p>Well versed in building custom interfaces and dashboards for a wide variety of industries and use cases.</p>
+            </div>
+            <div class="eng-card">
+                <div class="icon">🤖</div>
+                <h3>AI & Automation</h3>
+                <p>Use leading AI research and automation methodologies to boost organizational workflows and productivity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="deployments">
+        <div class="section-title">Recent Deployments</a>
+        <div class="section-sub">Trusted by brands across industries</a>
+        <div class="deploy-grid">
+            <a href="https://ouiriseinit.github.io/xavieraustingroup.html" class="deploy-card">Xavier Austin Group LLC</a>
+            <a href="https://ouiriseinit.github.io/maleekmusic.html" class="deploy-card">Maleek Music</a>
+            <a href="https://ouiriseinit.github.io/ourstyle.html" class="deploy-card">Our Style Apparel</a>
+            <a href="https://ouiriseinit.github.io/businesscents" class="deploy-card">Business Cents LLC</a>
+            <a href="https://ouiriseinit.github.io/thejugobar" class="deploy-card">theJugoBar</a>
+            <a href="https://ouiriseinit.github.io/culturalgold" class="deploy-card">Cultural Gold</a>
+            <a href="https://ouiriseinit.github.io/homeserviceexperts.html" class="deploy-card">Home Service Experts</a>
+            <a href="https://ouiriseinit.github.io/miyu" class="deploy-card">E-commerce Template</a>
+        </div>
+    </section>
+
+    <section class="section" id="plans">
+        <div class="section-title">Project Plans</div>
+        <div class="section-sub">Engineered for scalability, drafted for success.</div>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <div class="plan-tier">Prototype</div>
+                <div class="plan-name">Single Page Application</div>
+                <div class="plan-desc">The SPA Plan is built to draft ideas and to assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.</div>
+                <ul class="plan-features">
+                    <li>Modern Cloud Deployment</li>
+                    <li>Responsive Design</li>
+                    <li>Speed Optimized</li>
+                </ul>
+            </div>
+            <div class="plan-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <div class="plan-tier">Growth</div>
+                <div class="plan-name">The MVP Solution</div>
+                <div class="plan-desc">Expert software engineers scale your business with an interactive cloud solution. A balanced approach between availability and flexibility, suitable for projects requiring consistent evolution.</div>
+                <ul class="plan-features">
+                    <li>Custom Database Integration</li>
+                    <li>Server Management Included</li>
+                    <li>Interactive Dashboards</li>
+                </ul>
+            </div>
+            <div class="plan-card">
+                <div class="plan-tier">Enterprise</div>
+                <div class="plan-name">Big Data & AI</div>
+                <div class="plan-desc">Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions to improve workflow productivity and data-driven decision making.</div>
+                <ul class="plan-features">
+                    <li>AI Agent Workflows</li>
+                    <li>Full-time Engineering Focus</li>
+                    <li>Custom Analytics Suites</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 <a href="https://ouirise.github.io" target="_blank">Ouirise Initiative</a>. All rights reserved.</p>
+    </footer>
+</body>
+</html>
